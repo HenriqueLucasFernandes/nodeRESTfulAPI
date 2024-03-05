@@ -9,6 +9,7 @@
 * Este trablho tem por objetivo a implementação de uma API RESTful(com cache), desenvolvida em Node e deve conter uma estrutura de interface simples para as operações de CRUD:
 
 | Ação                            | Operação (CRUD)            | Mapeamento da URL     |
+| :-----------------------------: | :------------------------: | :-------------------: |
 | Incluir um produto              | CREATE                     | POST / produtos /     |
 | Obter a lista de produtos       | RETRIEVE                   | GET / produtos        |
 | Obter um produto específico     | RETRIEVE                   | GET / produtos /:id   |
