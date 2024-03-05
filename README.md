@@ -29,7 +29,7 @@ Para visualizar e utilizar a API e todas as suas funcionalidades, será necessá
 Com tudo instalado em sua máquina, na pasta raiz do projeto, deve-se executar o comando: "node index.js"
 Se tudo estiver funcionando corretamente, a mensagem "O Servidor está rodando na porta 3000" deverá ser exibida no terminal.
 
-Para executar os testes na API, importe o arquivo collection.json, que está na raiz do projeto, para alguma plataforma de gerenciamento de APIs como Postman, Insomnia, etc.
+Para executar os testes na API, importe o arquivo "APIs_e_WebSockets.postman_collection", que está na raiz do projeto, para alguma plataforma de gerenciamento de APIs como Postman, Insomnia, etc.
 
 Feita a importação, basta utilizar os comandos POST, GET, DELETE e PUT, lembrando que o servidor da aplicação deve estar ativo.
 

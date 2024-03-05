@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "d460cffe-5e2d-43b8-a065-f93c5d07e7c1",
+		"name": "APIs e WebSockets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4932810"
+	},
+	"item": [
+		{
+			"name": "Produtos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Produtos array is present and contains expected number of elements\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.produtos).to.exist.and.to.be.an('array');",
+							"    pm.expect(responseData.produtos.length).to.equal(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Valor is a non-negative number\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.produtos.forEach(function(produto) {",
+							"        pm.expect(produto.valor).to.be.a('number').and.to.be.at.least(0);",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Descricao and marca are non-empty strings\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    responseData.produtos.forEach(function(produto) {",
+							"        pm.expect(produto.descricao).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Descricao should not be empty\");",
+							"        pm.expect(produto.marca).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Marca should not be empty\");",
+							"    });",
+							"});",
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>ID</th>",
+							"        <th>Description</th>",
+							"        <th>Value</th>",
+							"        <th>Brand</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response.produtos}}",
+							"        <tr id=row_{{@key}}>",
+							"            <td>{{id}}</td>",
+							"            <td>{{descricao}}</td>",
+							"            <td>{{valor}}</td>",
+							"            <td>{{marca}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()};",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "id",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Produtos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"Produto adicionado\",\r\n    \"valor\": 35,\r\n    \"marca\": \"Pos Graduacao - PUC-MG\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Produto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/produtos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Produto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/produtos/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Produto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"descricao\": \"Batata Menor Palha 300gr\",\r\n    \"valor\": 15.2,\r\n    \"marca\": \"Chipps\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/produtos/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
